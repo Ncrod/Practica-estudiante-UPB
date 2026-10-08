@@ -6,18 +6,67 @@
     <title>Muro de Ideas</title>
     <link rel="stylesheet" href="{% static 'ideas/css/board.css' %}">
 </head>
-<body>
+<body data-board-id="{{ board_id }}">
     <header class="toolbar">
-        <h1>Muro de Ideas</h1>
-        <form id="new-idea-form">
-            <input type="text" id="new-title" placeholder="Título" required>
-            <input type="text" id="new-content" placeholder="Contenido">
-            <input type="color" id="new-color" value="#ffe066">
-            <button type="submit">Agregar idea</button>
-        </form>
+        <button id="sidebar-toggle" class="sidebar-toggle" title="Tableros">&#9776;</button>
+        <h1>Muro de Ideas <span id="header-board-path" class="header-board-path"></span></h1>
     </header>
-    <main id="board" class="board"></main>
 
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <span>Tableros</span>
+            <button id="new-board-btn" class="new-board-btn" title="Nuevo tablero">+</button>
+        </div>
+        <ul id="board-list" class="board-list"></ul>
+        <form id="new-board-form" class="new-board-form hidden">
+            <input type="text" id="new-board-input" placeholder="Nombre del tablero" maxlength="120">
+            <div class="new-board-actions">
+                <button type="button" id="new-board-cancel" class="discard-btn">Cancelar</button>
+                <button type="submit" id="new-board-confirm" class="create-btn">Crear</button>
+            </div>
+        </form>
+    </aside>
+    <div id="sidebar-backdrop" class="sidebar-backdrop hidden"></div>
+
+    <div id="board-context-popup" class="context-popup hidden">
+        <button id="board-edit-btn" class="edit-btn">Editar</button>
+    </div>
+
+    <div id="rename-board-overlay" class="overlay hidden">
+        <form id="rename-board-form" class="idea-card idea-popup-card rename-board-card">
+            <h3>Renombrar tablero</h3>
+            <input type="text" id="rename-board-input" maxlength="120">
+            <div class="card-actions popup-actions">
+                <button type="button" id="rename-board-cancel" class="discard-btn">Cancelar</button>
+                <button type="submit" id="rename-board-confirm" class="create-btn">Guardar</button>
+            </div>
+        </form>
+    </div>
+
+    <main id="board-wrapper" class="board-wrapper">
+        <div id="board" class="board"></div>
+    </main>
+
+    <button id="add-btn" class="add-btn" title="Agregar idea">+</button>
+
+    <div id="idea-popup-overlay" class="overlay hidden">
+        <div id="idea-popup-card" class="idea-card idea-popup-card">
+            <h3 id="popup-title" contenteditable="true" data-placeholder="Título"></h3>
+            <p id="popup-content" contenteditable="true" data-placeholder="Contenido"></p>
+            <div class="card-actions popup-actions">
+                <input type="color" id="popup-color" value="#ffe066">
+                <button type="button" id="discard-btn" class="discard-btn">Descartar</button>
+                <button type="button" id="save-btn" class="create-btn">Agregar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="context-popup" class="context-popup hidden">
+        <button id="edit-popup-btn" class="edit-btn">Editar</button>
+        <button id="delete-popup-btn" class="delete-btn">Eliminar</button>
+    </div>
+
+    <script src="{% static 'ideas/js/sidebar.js' %}"></script>
     <script src="{% static 'ideas/js/board.js' %}"></script>
 </body>
 </html>
