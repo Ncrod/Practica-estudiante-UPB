@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Muro de Ideas</title>
+    <link rel="stylesheet" href="{% static 'ideas/css/board.css' %}">
+</head>
+<body>
+    <header class="toolbar">
+        <h1>Muro de Ideas</h1>
+        <form id="new-idea-form">
+            <input type="text" id="new-title" placeholder="Título" required>
+            <input type="text" id="new-content" placeholder="Contenido">
+            <input type="color" id="new-color" value="#ffe066">
+            <button type="submit">Agregar idea</button>
+        </form>
+    </header>
+    <main id="board" class="board"></main>
+
+    <script src="{% static 'ideas/js/board.js' %}"></script>
+</body>
+</html>
